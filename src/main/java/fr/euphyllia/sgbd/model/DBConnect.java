@@ -1,6 +1,6 @@
-package fr.euphyllia.model;
+package fr.euphyllia.sgbd.model;
 
-import fr.euphyllia.exceptions.DatabaseException;
+import fr.euphyllia.sgbd.exceptions.DatabaseException;
 
 public interface DBConnect {
 

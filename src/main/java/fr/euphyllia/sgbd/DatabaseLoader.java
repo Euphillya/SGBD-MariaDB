@@ -1,7 +1,6 @@
-package fr.euphyllia;
+package fr.euphyllia.sgbd;
 
-import fr.euphyllia.exceptions.DatabaseException;
-import fr.euphyllia.sgbd.MariaDB;
+import fr.euphyllia.sgbd.exceptions.DatabaseException;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -9,8 +8,8 @@ import java.sql.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import fr.euphyllia.stream.AsciiStream;
-import fr.euphyllia.stream.BinaryStream;
+import fr.euphyllia.sgbd.stream.AsciiStream;
+import fr.euphyllia.sgbd.stream.BinaryStream;
 import org.jetbrains.annotations.Nullable;
 
 public class DatabaseLoader {

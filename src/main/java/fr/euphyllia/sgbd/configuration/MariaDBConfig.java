@@ -1,4 +1,4 @@
-package fr.euphyllia.configuration;
+package fr.euphyllia.sgbd.configuration;
 
 public record MariaDBConfig(String hostname, String port, String user, String pass,
                             Boolean useSSL,

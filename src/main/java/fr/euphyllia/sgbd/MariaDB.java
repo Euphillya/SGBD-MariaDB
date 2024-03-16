@@ -1,10 +1,10 @@
 package fr.euphyllia.sgbd;
 
 import com.zaxxer.hikari.HikariDataSource;
-import fr.euphyllia.configuration.MariaDBConfig;
-import fr.euphyllia.exceptions.DatabaseException;
-import fr.euphyllia.model.DBConnect;
-import fr.euphyllia.model.DBInterface;
+import fr.euphyllia.sgbd.configuration.MariaDBConfig;
+import fr.euphyllia.sgbd.exceptions.DatabaseException;
+import fr.euphyllia.sgbd.model.DBConnect;
+import fr.euphyllia.sgbd.model.DBInterface;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

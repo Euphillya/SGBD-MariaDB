@@ -1,4 +1,4 @@
-package fr.euphyllia.exceptions;
+package fr.euphyllia.sgbd.exceptions;
 
 public class DatabaseException extends Exception {
 

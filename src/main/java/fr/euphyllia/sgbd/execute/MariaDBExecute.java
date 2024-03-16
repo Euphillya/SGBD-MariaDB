@@ -1,10 +1,10 @@
-package fr.euphyllia.execute;
+package fr.euphyllia.sgbd.execute;
 
-import fr.euphyllia.DatabaseLoader;
-import fr.euphyllia.exceptions.DatabaseException;
-import fr.euphyllia.model.DBCallback;
-import fr.euphyllia.model.DBCallbackInt;
-import fr.euphyllia.model.DBWork;
+import fr.euphyllia.sgbd.DatabaseLoader;
+import fr.euphyllia.sgbd.exceptions.DatabaseException;
+import fr.euphyllia.sgbd.model.DBCallback;
+import fr.euphyllia.sgbd.model.DBCallbackInt;
+import fr.euphyllia.sgbd.model.DBWork;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
