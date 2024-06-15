@@ -19,20 +19,12 @@ public class MariaDBExecute {
     private static final String DATABASE_NOT_FOUND_ERROR = "Cannot get connection to the database";
     private static final Logger logger = LogManager.getLogger(MariaDBExecute.class);
 
-    public static void executeQuery(DatabaseLoader pool, String query) {
-        try {
-            executeQuery(pool, query, null, null, null, false);
-        } catch (DatabaseException e) {
-            logger.log(Level.FATAL, e.getMessage(), e);
-        }
+    public static void executeQuery(DatabaseLoader pool, String query) throws DatabaseException {
+        executeQuery(pool, query, null, null, null, false);
     }
 
-    public static void executeQuery(DatabaseLoader pool, String query, List<?> param, DBCallback callback, DBWork work) {
-        try {
-            executeQuery(pool, query, param, callback, work, false);
-        } catch (DatabaseException e) {
-            logger.log(Level.FATAL, e.getMessage(), e);
-        }
+    public static void executeQuery(DatabaseLoader pool, String query, List<?> param, DBCallback callback, DBWork work) throws DatabaseException {
+        executeQuery(pool, query, param, callback, work, false);
     }
 
     public static void executeQuery(DatabaseLoader pool, String query, List<?> param, DBCallback callback, DBWork work, boolean ignoreError) throws DatabaseException {
@@ -54,9 +46,7 @@ public class MariaDBExecute {
             }
             connection.close();
         } catch (SQLException | DatabaseException exception) {
-            if (Boolean.FALSE.equals(ignoreError)) {
-                throw new DatabaseException(exception);
-            }
+            throw new DatabaseException(exception);
         }
     }
 
@@ -68,14 +58,14 @@ public class MariaDBExecute {
      * @param callback rendu
      * @param work     pool connexion
      */
-    public static void executeQueryDML(DatabaseLoader pool, String query, List<?> param, DBCallbackInt callback, DBWork work) {
+    public static void executeQueryDML(DatabaseLoader pool, String query, List<?> param, DBCallbackInt callback, DBWork work) throws DatabaseException {
         if (pool == null) {
-            throw new NullPointerException(DATABASE_NOT_FOUND_ERROR);
+            throw new DatabaseException(DATABASE_NOT_FOUND_ERROR);
         }
         try {
             Connection connection = pool.getMariaDBConnection();
             if (connection == null) {
-                throw new NullPointerException(DATABASE_NOT_FOUND_ERROR);
+                throw new DatabaseException(DATABASE_NOT_FOUND_ERROR);
             } else if (work != null) {
                 work.run(connection);
             } else {
@@ -87,7 +77,7 @@ public class MariaDBExecute {
                 connection.close();
             }
         } catch (SQLException | DatabaseException exception) {
-            logger.log(Level.FATAL, exception.getMessage(), exception);
+            throw new DatabaseException(exception);
         }
     }
 }
