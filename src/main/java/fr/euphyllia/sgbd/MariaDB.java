@@ -39,7 +39,7 @@ public class MariaDB implements DBConnect, DBInterface {
         this.pool.setMinimumIdle(mariaDBConfig.maxPool());
 
         try (Connection connection = pool.getConnection()) {
-            if (connection.isValid(1)) {
+            if (connection.isValid(2)) {
                 this.connected = true;
                 this.logger.log(Level.INFO, "MariaDB pool initialized (%s)".formatted(mariaDBConfig.maxPool()));
                 return true;
@@ -53,26 +53,28 @@ public class MariaDB implements DBConnect, DBInterface {
 
     @Override
     public void onClose() {
-        if (this.isConnected()) {
+        if (isConnected() && this.pool != null && !this.pool.isClosed()) {
             this.pool.close();
+            connected = false;
         }
     }
 
     @Override
     public boolean isConnected() {
-        return this.connected;
+        return connected && this.pool != null && !this.pool.isClosed();
     }
 
     @Override
     public @Nullable Connection getConnection() throws DatabaseException {
+        if (!isConnected()) {
+            throw new DatabaseException("Non connecté à la base de données.");
+        }
+
         try {
-            if (pool.isClosed()) {
-                return null;
-            }
-            return pool.getConnection();
+            return this.pool.getConnection();
         } catch (SQLException e) {
-            logger.log(Level.FATAL, e.getMessage(), e);
-            throw new DatabaseException(e);
+            this.logger.fatal("Erreur lors de l'obtention de la connexion : {}", e.getMessage(), e);
+            throw new DatabaseException("Erreur lors de l'obtention de la connexion.", e);
         }
     }
 }

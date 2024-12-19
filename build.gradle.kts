@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "fr.euphyllia"
-version = "1.3"
+version = "1.4-FINAL"
 
 repositories {
     mavenCentral()
@@ -16,7 +16,7 @@ dependencies {
     compileOnly("org.apache.logging.log4j:log4j-core:2.22.1")
     compileOnly("org.mariadb.jdbc:mariadb-java-client:3.3.2")
     compileOnly("com.zaxxer:HikariCP:5.1.0")
-    implementation("org.jetbrains:annotations:24.0.0")
+    compileOnly("org.jetbrains:annotations:24.0.0")
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
